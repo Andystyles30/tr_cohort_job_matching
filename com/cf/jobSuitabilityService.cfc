@@ -72,7 +72,7 @@ component name="jobSuitabilityService" output=false description="service to retu
 			}
 		
 		return local.callResult;
-		} 
+	} 
 }
 
 
