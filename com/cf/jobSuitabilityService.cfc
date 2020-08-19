@@ -21,7 +21,7 @@ component name="jobSuitabilityService" output=false description="service to retu
 		local.characteristicsMatchCount = 0;
 		for (local.characteristic IN ListToArray(arguments.jobCharacteristics)) {
 			for (local.individualCharacteristic IN ListToArray(arguments.individualCharacteristics)) {					
-				if (FindNoCase(characteristic, individualCharacteristic)) {
+				if (FindNoCase(local.characteristic, local.individualCharacteristic)) {
 					local.characteristicsMatchCount = local.characteristicsMatchCount + 1;
 					// TODO, remove item from list when found otherwise you get extra counts
 				}
@@ -56,11 +56,11 @@ component name="jobSuitabilityService" output=false description="service to retu
 		local.callResult.info = {
 			status: "success"
 		};
-		local.jobCharacteristicsCount = ListLen(jobCharacteristics);
+		local.jobCharacteristicsCount = ListLen(arguments.jobCharacteristics);
 
 		try {
 			// call getcharacteristicMatch method
-			local.matchCount = getcharacteristicMatch(jobCharacteristics, individualCharacteristics);
+			local.matchCount = getcharacteristicMatch(arguments.jobCharacteristics, arguments.individualCharacteristics);
 			local.percentage = getPercentageMatch(local.jobCharacteristicsCount, local.matchCount)
 			local.callResult.data.matchCount = local.matchCount;
 			local.callResult.data.percentage = local.percentage;			
